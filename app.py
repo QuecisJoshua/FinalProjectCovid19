@@ -167,7 +167,7 @@ def covid_stat_Scrapper():
 # create route that renders index.html template
 @app.route("/")
 def home():
-    data = [10,20,30] #covid_stat_Scrapper()
+    data = covid_stat_Scrapper()
     return render_template("index.html", confirmed=data[0], deaths=data[1], recovered=data[2])
 
 @app.route("/custom")
