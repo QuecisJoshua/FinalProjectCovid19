@@ -227,5 +227,5 @@ def search():
 if __name__ == "__main__":
     #import webbrowser
     #webbrowser.open("http://127.0.0.1:5000/")
-    setup_SQLitedb()
+    #setup_SQLitedb()
     app.run()
