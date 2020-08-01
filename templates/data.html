@@ -1,0 +1,76 @@
+{% extends "base.html" %}
+
+{% block title %} COVID-19 STATISTICS {% endblock %}
+
+{% block pageheader%}
+<h1>COVID-19 Data Search</h1>
+<p>3/22/2020 - 7/31/2020</p>
+{% endblock %}
+
+{% block main %}
+<div class="container">
+    <div class="row margin-top-50">
+        <div class="col-sm-3">
+            <aside class="filters">
+                <div class="panel panel-default">
+                    <div class="panel-heading">Search Criteria</div>
+                    <div class="panel-body">
+                        <form action="/search" method="POST">
+                            <div class="form-group">
+                                <ul class="list-group" id="filters">
+                                    <li class="filter list-group-item">
+                                        <label for="date">Enter From Date</label>
+                                        <input class="form-control" name="fromdate" type="date" placeholder="mm/dd/yyyy"
+                                            value="{{fromdate}}" >
+                                        <label for="date">Enter To Date</label>
+                                        <input class="form-control" name="todate" type="date" placeholder="mm/dd/yyyy"
+                                            value="{{todate}}" >
+                                        <label for="county">Enter a County</label>
+                                        <input class="form-control" name="county" type="text" placeholder="Maricopa"
+                                            value="{{county}}">
+                                        <label for="state">Enter a State</label>
+                                        <input class="form-control" name="state" type="text" placeholder="Arizona"
+                                            value="{{state}}">
+                                        <button class="btn btn-default" name="searchresult" type="submit">Search
+                                            Data</button>
+                                    </li>
+                                </ul>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </aside>
+        </div>
+        <div class="col-sm-9">
+            <div id="table-area" class="">
+                <table id="ufo-table" class="table table-striped" style="text-align: center;">
+                    {{msg}}
+                    <thead>
+                        <tr>
+                            <th class="table-head">Date</th>
+                            <th class="table-head">County</th>
+                            <th class="table-head">State</th>
+                            <th class="table-head">Confirmed</th>
+                            <th class="table-head">Deaths</th>
+                            <th class="table-head">Active</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {%for item in data%}
+                        <tr>
+                            <td>{{item[0]}}</td>
+                            <td>{{item[1]}}</td>
+                            <td>{{item[2]}}</td>
+                            <td>{{item[3]}}</td>
+                            <td>{{item[4]}}</td>
+                            <td>{{item[5]}}</td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock %}
