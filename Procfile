@@ -1,0 +1,1 @@
+web: gunicorn finalprojectcovid19.app:app
