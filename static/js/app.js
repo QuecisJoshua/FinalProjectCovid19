@@ -72,6 +72,93 @@ function buildStateGraph(selectedVar) {
 
 }
 
+function download_csv() {
+
+    var fromdate = document.getElementById("txtfromdate");
+    var todate = document.getElementById("txttodate");
+    var county = document.getElementById("txtcounty");
+    var state = document.getElementById("txtstate");
+    var csv = "Date, County, State, Confirmed, Deaths, Active\n";
+
+    var entry = {
+        fromdate: fromdate.value,
+        todate: todate.value,
+        county: county.value,
+        state: state.value
+    };
+
+    fetch(`${window.origin}/custom/Search`, {
+        method: "POST",
+        credentials: "include",
+        body: JSON.stringify(entry),
+        cache: "no-cache",
+        headers: new Headers({
+            "content-type": "application/json"
+        })
+    })
+        .then(function (response) {
+            if (response.status !== 200) {
+                console.log("Response was not 200");
+                return;
+            }
+            var csv = "Active, Confirmed, Date, Deaths, County, State\n";
+            response.json().then(function (data) {
+                data.forEach(obj => {
+                    Object.entries(obj).forEach(([key, value]) => {
+
+                        if (key == "active") {
+                            csv += value.toString() + ",";
+                        }
+
+                        if (key == "confirmed") {
+                            csv += value.toString() + ",";
+                        }
+
+                        if (key == "datadate") {
+                            csv += value.toString() + ",";
+                        }
+
+                        if (key == "deaths") {
+                            csv += value.toString() + ",";
+                        }
+
+                        if (key == "uscounty") {
+                            csv += value.toString() + ",";
+                        }
+
+                        if (key == "usstate") {
+                            csv += value.toString() + "\n";
+                        }
+
+                    });
+                });
+                mimeType = 'text/csv;encoding:utf-8';
+                fileName = 'download.csv';
+                var a = document.createElement('a');
+                mimeType = mimeType || 'application/octet-stream';
+              
+                if (navigator.msSaveBlob) { // IE10
+                  navigator.msSaveBlob(new Blob([csv], {
+                    type: mimeType
+                  }), fileName);
+                } else if (URL && 'download' in a) { //html5 A[download]
+                  a.href = URL.createObjectURL(new Blob([csv], {
+                    type: mimeType
+                  }));
+                  a.setAttribute('download', fileName);
+                  document.body.appendChild(a);
+                  a.click();
+                  document.body.removeChild(a);
+                } else {
+                  location.href = 'data:application/octet-stream,' + encodeURIComponent(content); // only this mime type is supported
+                }
+              
+            
+            })
+
+        })
+}
+
 function init() {
     buildStateGraph('confirmed');
 }

@@ -20,16 +20,16 @@
                                 <ul class="list-group" id="filters">
                                     <li class="filter list-group-item">
                                         <label for="date">Enter From Date</label>
-                                        <input class="form-control" name="fromdate" type="date" placeholder="mm/dd/yyyy"
-                                            value="{{fromdate}}" >
+                                        <input class="form-control" id="txtfromdate" name="fromdate" type="date" placeholder="mm/dd/yyyy"
+                                            value="{{fromdate}}">
                                         <label for="date">Enter To Date</label>
-                                        <input class="form-control" name="todate" type="date" placeholder="mm/dd/yyyy"
-                                            value="{{todate}}" >
+                                        <input class="form-control" id="txttodate" name="todate" type="date" placeholder="mm/dd/yyyy"
+                                            value="{{todate}}">
                                         <label for="county">Enter a County</label>
-                                        <input class="form-control" name="county" type="text" placeholder="Maricopa"
+                                        <input class="form-control" id="txtcounty" name="county" type="text" placeholder="Maricopa"
                                             value="{{county}}">
                                         <label for="state">Enter a State</label>
-                                        <input class="form-control" name="state" type="text" placeholder="Arizona"
+                                        <input class="form-control" id="txtstate" name="state" type="text" placeholder="Arizona"
                                             value="{{state}}">
                                         <button class="btn btn-default" name="searchresult" type="submit">Search
                                             Data</button>
@@ -44,6 +44,9 @@
         <div class="col-sm-9">
             <div id="table-area" class="">
                 <table id="ufo-table" class="table table-striped" style="text-align: center;">
+                    {% if msg != "Please input parameters to search COVID-19 Data." %}
+                    <button class="btn btn-default" onclick="download_csv();">Download</button>
+                    {% endif %}
                     {{msg}}
                     <thead>
                         <tr>
