@@ -45,7 +45,7 @@
             <div id="table-area" class="">
                 <table id="ufo-table" class="table table-striped" style="text-align: center;">
                     {% if msg != "Please input parameters to search COVID-19 Data." %}
-                    <button class="btn btn-default" onclick="download_csv();">Download</button>
+                    <button type="button" class="btn btn-warning" onclick="download_csv();">Download</button>
                     {% endif %}
                     {{msg}}
                     <thead>
