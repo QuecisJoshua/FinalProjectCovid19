@@ -27,7 +27,7 @@ def setup_SQLitedb():
     input_file = os.getcwd()+ r"\static\data\covid_data.csv"
 
     try:
-        sqliteConnection = sqlite3.connect(os.getcwd()+ r"\static\data\SQLite_covid_data.db")
+        sqliteConnection = sqlite3.connect('static/data/SQLite_covid_data.db')
         cursor = sqliteConnection.cursor()
         cursor.fetchall()
         print("Database created and Successfully Connected to SQLite")
@@ -110,7 +110,7 @@ def dict_factory(cursor, row):
 def buildJsonFile(query):
     try:
         #connect to SQLits db
-        sqliteConnection = sqlite3.connect(os.getcwd()+ r"\static\data\SQLite_covid_data.db")
+        sqliteConnection = sqlite3.connect('static/data/SQLite_covid_data.db')
         sqliteConnection.row_factory = dict_factory
 
         cursor = sqliteConnection.cursor()
@@ -121,9 +121,6 @@ def buildJsonFile(query):
 
     except sqlite3.Error as error:
         return("Failed to read data from sqlite table", error)
-    finally:
-        if (sqliteConnection):
-            sqliteConnection.close()
 
 #################################################
 # Table Data Builder
@@ -132,7 +129,7 @@ def buildJsonFile(query):
 def readSqliteTable(query):
     try:
         #connect to SQLits db
-        sqliteConnection = sqlite3.connect(os.getcwd()+ r"\static\data\SQLite_covid_data.db")
+        sqliteConnection = sqlite3.connect('static/data/SQLite_covid_data.db')
         cursor = sqliteConnection.cursor()
         cursor.execute(query)
         querydata = cursor.fetchall()
@@ -140,9 +137,6 @@ def readSqliteTable(query):
         return querydata
     except sqlite3.Error as error:
         return("Failed to read data from sqlite table", error)
-    finally:
-        if (sqliteConnection):
-            sqliteConnection.close()
 
 #################################################
 # Web scrapper
