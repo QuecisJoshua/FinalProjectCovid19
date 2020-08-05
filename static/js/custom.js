@@ -18,7 +18,8 @@ function initMap() {
         data: getreturnstring(),
         map: map
     });
-    heatmap.set("radius", heatmap.get("radius") ? null : 50);
+    heatmap.set("radius", heatmap.get("radius") ? null : 75);
+    heatmap.set("maxIntensity", heatmap.get("maxIntensity") ? null : 16000);
     changeRadius();
     changeOpacity();
     changeGradient();
