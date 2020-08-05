@@ -18,6 +18,7 @@ function initMap() {
         data: getreturnstring(),
         map: map
     });
+    heatmap.set("radius", heatmap.get("radius") ? null : 50);
     changeRadius();
     changeOpacity();
     changeGradient();
@@ -29,7 +30,7 @@ function getreturnstring() {
         data.forEach(function(d) {
             let coordinates = {
                 'location': new google.maps.LatLng(parseFloat(d.lat), parseFloat(d.long)),
-                'weight': parseInt(d.deaths)
+                'weight': parseFloat(d.deaths)
             }
             returnString.push(coordinates);
         });
