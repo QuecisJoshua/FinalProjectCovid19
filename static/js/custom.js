@@ -29,7 +29,7 @@ function getreturnstring() {
         data.forEach(function(d) {
             let coordinates = {
                 'location': new google.maps.LatLng(parseFloat(d.lat), parseFloat(d.long)),
-                'weight': parseInt(d.deaths)
+                'weight': parseFloat(d.deaths)
             }
             returnString.push(coordinates);
         });
