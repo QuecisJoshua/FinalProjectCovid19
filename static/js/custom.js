@@ -20,10 +20,10 @@ function initMap() {
     });
     heatmap.set("radius", heatmap.get("radius") ? null : 75);
     heatmap.set("maxIntensity", heatmap.get("maxIntensity") ? null : 16000);
+}
     changeRadius();
     changeOpacity();
     changeGradient();
-}
 
 function getreturnstring() {
     returnString = [];
@@ -64,7 +64,7 @@ function changeGradient() {
 }
 
 function changeRadius() {
-    heatmap.set("radius", heatmap.get("radius") ? null : 20);
+    //heatmap.set("radius", heatmap.get("radius") ? null : 20);
 }
 
 function changeOpacity() {
